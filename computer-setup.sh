@@ -7,7 +7,7 @@ install_software () {
   sudo apt install vim tmux git;
 }
 
-register_github() {
+register_github () {
   echo 'Registering Github Keys'
   # Register a new SSH key with github
   echo 'Enter your email address for github > '
