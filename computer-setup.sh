@@ -17,7 +17,8 @@ install_software () {
   sudo mv julia /opt/julia-1.3.0
   cd /opt/julia-1.3.0 && git checkout v1.3.0
   make -j 4
-  sudo ln -s /usr/bin/julia julia
+  cd /usr/bin;
+  sudo ln -s julia /opt/julia-1.3.0
 }
 
 register_github () {
