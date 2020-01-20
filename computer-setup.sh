@@ -12,8 +12,9 @@ install_software () {
   bash Miniconda3-latest-Linux-x86_64.sh
   
   # Installing Julia
+  sudo apt-get install build-essential libatomic1 python gfortran perl wget m4 cmake pkg-config
   git clone https://github.com/JuliaLang/julia.git
-  sudo move julia /opt/julia-1.3.0
+  sudo mv julia /opt/julia-1.3.0
   cd /opt/julia-1.3.0 && git checkout v1.3.0
   make -j 4
   sudo ln -s /usr/bin/julia julia
