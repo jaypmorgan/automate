@@ -5,6 +5,20 @@ install_software () {
   sudo apt update;
   sudo apt upgrade -y;
   sudo apt install vim tmux git;
+  
+  # Installing miniconda
+  cd ~/;
+  wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+  bash Miniconda3-latest-Linux-x86_64.sh
+  
+  # Installing Julia
+  sudo apt-get install build-essential libatomic1 python gfortran perl wget m4 cmake pkg-config
+  git clone https://github.com/JuliaLang/julia.git
+  sudo mv julia /opt/julia-1.3.0
+  cd /opt/julia-1.3.0 && git checkout v1.3.0
+  make -j 4
+  cd /usr/bin;
+  sudo ln -s julia /opt/julia-1.3.0
 }
 
 register_github () {
