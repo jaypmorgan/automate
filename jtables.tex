@@ -1,0 +1,17 @@
+\usepackage{pgfplotstable}
+    \pgfplotsset{compat=newest}
+
+%% combine two existing columns into one column. Useful for cols with mean
+%% and std. For example 0.4754 (0.4932)
+%%
+%% usage: \combineCol{<name of first col>}{<name of second col>}{<alias>}{<datasource>}
+\newcommand{\combineCol}[4]{
+    \pgfplotstablecreatecol[
+        create col/assign/.code={%
+            \edef\entry{
+                \noexpand\pgfmathprintnumber[precision=4,fixed,zerofill]{\thisrow{#1}} (\noexpand\pgfmathprintnumber[precision=4,fixed,zerofill]{\thisrow{#2}})
+            }
+            \pgfkeyslet{/pgfplots/table/create col/next content}\entry
+        }
+    ]{#3}#4
+}
