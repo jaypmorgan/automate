@@ -1,17 +1,27 @@
 \usepackage{pgfplotstable}
     \pgfplotsset{compat=newest}
+\usepackage{xkeyval}  % better optional parameters
+
+\makeatletter
+\define@key{combineCol}{precision}[4]{\def\cbprec{#1}}
+\savekeys{combineCol}{precision}
+\makeatother
 
 %% combine two existing columns into one column. Useful for cols with mean
 %% and std. For example 0.4754 (0.4932)
 %%
-%% usage: \combineCol{<name of first col>}{<name of second col>}{<alias>}{<datasource>}
-\newcommand{\combineCol}[4]{
+%% usage: \combineCol[precision=<default 4>]{<name of first col>}{<name of second col>}{<alias>}{<datasource>}
+%%        the precision option must be set once per table currently...
+
+\newcommand{\combineCol}[5][]{
+    \setkeys{combineCol}{#1}
+
     \pgfplotstablecreatecol[
         create col/assign/.code={%
             \edef\entry{
-                \noexpand\pgfmathprintnumber[precision=4,fixed,zerofill]{\thisrow{#1}} (\noexpand\pgfmathprintnumber[precision=4,fixed,zerofill]{\thisrow{#2}})
+                \noexpand\pgfmathprintnumber[precision=\cbprec,fixed,zerofill]{\thisrow{#2}} (\noexpand\pgfmathprintnumber[precision=\cbprec,fixed,zerofill]{\thisrow{#3}})
             }
             \pgfkeyslet{/pgfplots/table/create col/next content}\entry
         }
-    ]{#3}#4
+    ]{#4}#5
 }
