@@ -49,7 +49,7 @@ install_dots () {
   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim;
   
   mkdir -p ~/workspace;
-  cd workspace && git clone git@github.com:jaypmorgan/dotfiles.git
+  cd ~/workspace && git clone git@github.com:jaypmorgan/dotfiles.git
   cp dotfiles/.vimrc ~/.;
   cp dotfiles/.tmux.conf ~/.;
   vim -c 'PluginInstall' -c 'qa!';
