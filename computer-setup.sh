@@ -4,12 +4,12 @@ install_software () {
   echo 'Installing Software'
   sudo apt update;
   sudo apt upgrade -y;
-  sudo apt install vim tmux git;
+  sudo apt install vim tmux git -y;
   
   # Installing miniconda
   cd ~/;
-  wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-  bash Miniconda3-latest-Linux-x86_64.sh
+  wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
+  bash ~/miniconda.sh -b -p $HOME/miniconda
   
   # Installing Julia
   sudo apt-get install build-essential libatomic1 python gfortran perl wget m4 cmake pkg-config
