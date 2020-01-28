@@ -49,6 +49,14 @@ install_dots () {
   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim;
   
   mkdir -p ~/workspace;
+  
+  # build the latest version of vim
+  mkdir -p ~/workspace/libs && cd ~/workspace/libs;
+  git clone https://github.com/vim/vim.git
+  cd vim
+  ./configure --with-features=huge --enable-pythoninterp --prefix=$(pwd)
+  make && make install
+  
   cd ~/workspace && git clone git@github.com:jaypmorgan/dotfiles.git
   cp dotfiles/.vimrc ~/.;
   cp dotfiles/.tmux.conf ~/.;
